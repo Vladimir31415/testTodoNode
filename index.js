@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const { checkJwt } = require('./token.middleware');
+
 const app = express();
 app.use(express.json());
 
@@ -24,7 +26,7 @@ let todos = [
 ];
 
 // Get all todos
-app.get('/api/todos', (req, res) => {
+app.get('/api/todos', checkJwt, (req, res) => {
   res.json(todos);
 });
 
